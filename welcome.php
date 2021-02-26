@@ -9,8 +9,9 @@ if (!isset($_SESSION['email'])) {
     header("location:login.php");
 }
 
+$result = "SELECT * FROM vivo";
 
-
+$query = mysqli_query($conn, $result);
 ?>
 
 
@@ -35,11 +36,74 @@ if (!isset($_SESSION['email'])) {
         <div class="conatainer">
             <h1>welcome here</h1>
         </div>
-
         <br>
-        welcome, <?php echo $_SESSION['email']; ?>
-        <?php echo $_SESSION['fname']; ?>
+        welcome, <?php echo $_SESSION['fname']; ?>
         <?php echo $_SESSION['lname']; ?>
+        <?php echo $_SESSION['email']; ?>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">email</th>
+                    <th scope="col">created</th>
+                    <th scope="col">edit </th>
+                    <th scope="col">delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+
+                $count = 1;
+
+                while ($row = mysqli_fetch_assoc($query)) {
+
+                    // echo "<pre>";
+                    // print_r($row);
+
+                ?>
+                    <tr class="ml-5">
+
+                        <td>
+                            <?php echo $count ?>
+                        </td>
+
+                        <td>
+                            <?php echo $row['first_name'] ?>
+                        </td>
+
+                        <td>
+                            <?php echo $row['last_name'] ?>
+                        </td>
+                        <td>
+                            <?php echo $row['email'] ?>
+                        </td>
+
+                        <td>
+                            <?php echo $row['created_at'] ?>
+                        </td>
+
+                        <td>
+                            <a href="edit.php?id=<?php echo $row["id"]; ?>" class="text-decoration-none">Edit</a>
+                        </td>
+
+                        <td>
+                            <a href="delete.php?id=<?php echo $row["id"]; ?>" class="text-decoration-none">Delete</a>
+
+                        </td>
+
+
+                    </tr>
+                <?php
+                    $count++;
+                }
+                ?>
+
+
+            </tbody>
+        </table>
 
     </div>
 

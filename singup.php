@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $msg = "";
     $msg_er = "";
+    $msg_err = "";
 
     $chk = "SELECT * FROM vivo WHERE email = '$email' ";
 
@@ -37,10 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $query = mysqli_query($conn, $sql);
 
-        if ($query) {
+        // if ($query) {
 
-            $msg = "user created";
-        }
+        //     $msg_err = "user created";
+        // }
     }
 }
 
@@ -62,6 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </head>
 
 <body>
+
+
     <div class="container mt-5 col-sm-4">
         <div>
             <h2>Register here</h2>
